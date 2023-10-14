@@ -17,10 +17,10 @@ class Solution(object):
 
         ans = [0] * 2*n
 
-        for i in range(len(ans)):
+        for i in range(len(nums)):
             ans[i] = nums[i]
         
-            ans[i+n] = num[i]
+            ans[i+n] = nums[i]
         
 
 
