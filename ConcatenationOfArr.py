@@ -25,3 +25,7 @@ class Solution(object):
 
 
         return ans
+
+        ## Alternate Solution 
+        ## return nums*2 or nums+nums 
+
