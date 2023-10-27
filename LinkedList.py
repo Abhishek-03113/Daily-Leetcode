@@ -105,23 +105,20 @@ class LinkedList:
         prev.next = currNode.next
         currNode = None
 
-
     def lenIterative(self):
-        count = 0 
+        count = 0
         currNode = self.head
 
         while currNode:
-            count += 1 
+            count += 1
             currNode = currNode.next
-        
+
         return count
-    def lenRecursive(self,node):
+
+    def lenRecursive(self, node):
         if node is None:
-            return 0 
-        return 1+ self.lenRecursive(node.next)
-
-
-
+            return 0
+        return 1 + self.lenRecursive(node.next)
 
 
 linkedList = LinkedList()
