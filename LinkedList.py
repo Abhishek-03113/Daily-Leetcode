@@ -1,3 +1,6 @@
+from typing import Counter
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -53,6 +56,53 @@ class LinkedList:
 
         newNode.next = prevNode.next
         prevNode.next = newNode
+
+    # Deleting a node
+
+    # Deleting Head Node
+    def deleteNode(self, key):
+        currNode = self.head
+
+        if currNode and currNode.data == key:
+            self.head = currNode.next
+            currNode = None
+
+            return
+
+        prev = None
+
+        while currNode and currNode.data != key:
+            prev = currNode
+            currNode = currNode.next
+
+        if currNode is None:
+            return
+        prev.next = currNode.next
+        currNode = None
+
+    # Deletion By position
+
+    def deleteNodeAtPosition(self, pos):
+        if self.head:
+            currNode = self.head
+            if pos == 0:
+                self.head = currNode.next
+                currNode = None
+
+        prev = None
+        count = 0
+
+        while currNode and count != pos:
+            prev = currNode
+            currNode = currNode.next
+
+            count += 1
+
+        if currNode is None:
+            return
+
+        prev.next = currNode.next
+        currNode = None
 
 
 linkedList = LinkedList()
