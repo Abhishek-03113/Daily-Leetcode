@@ -120,6 +120,62 @@ class LinkedList:
             return 0
         return 1 + self.lenRecursive(node.next)
 
+    def swapNode(self, key1, key2):
+        if key1 == key2:
+            return
+
+        prev1 = None
+        curr1 = self.head
+
+        while curr1 and curr1.data != key1:
+            prev1 = curr1
+            curr1 = curr1.next
+
+        prev2 = None
+        curr2 = self.head
+
+        while curr2 and curr2.data != key2:
+            prev2 = curr2
+            curr2 = curr2.next
+
+        if not curr1 or not curr2:
+            return
+
+        if prev1:
+            prev1.next = curr2
+        else:
+            self.head = curr2
+
+        if prev2:
+            prev2.next = curr1
+        else:
+            self.head = curr1
+
+        curr1.next, curr2.next = curr2.next, curr1.next
+
+    def reverseIterative(self):
+        prev = None
+        curr = self.head
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        self.head = prev
+
+    def reverseRecursive(self):
+        def _reverseRecursive(curr, prev):
+            if not curr:
+                return prev
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+            return _reverseRecursive(curr, prev)
+
+        self.head = _reverseRecursive(curr=self.head, prev=None)
+
 
 linkedList = LinkedList()
 
@@ -131,5 +187,13 @@ linkedList.append("E")
 linkedList.prepend("F")
 linkedList.insertAfterNode(linkedList.head.next, "Q")
 
+print(f"Linked List before reversing :")
+linkedList.printList()
 
+print(f"Linked List after Iterative Reversing : ")
+linkedList.reverseIterative()
+linkedList.printList()
+
+print(f"Linked List after Recursive Reversing : ")
+linkedList.reverseRecursive()
 linkedList.printList()
