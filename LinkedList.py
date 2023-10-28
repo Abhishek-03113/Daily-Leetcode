@@ -176,6 +176,67 @@ class LinkedList:
 
         self.head = _reverseRecursive(curr=self.head, prev=None)
 
+    def MergeSort(self, llist):
+        p = self.head
+
+        q = llist.head
+
+        s = None
+
+        if not p:
+            return q
+
+        if not q:
+            return p
+
+        if p and q:
+            if p.data <= q.data:
+                s = p
+
+                p = s.next
+            else:
+                s = q
+
+                q = s.next
+
+            newHead = s
+
+        while p and q:
+            if p.data <= q.data:
+                s.next = p
+                s = p
+                p = s.next
+
+            else:
+                s.next = q
+                s = q
+                q = s.next
+
+        if not p:
+            s.next = q
+        if not q:
+            s.next = p
+
+        self.head = newHead
+
+        return self.head
+
+    def removeDuplicates(self):
+        curr = self.head
+        prev = None
+
+        dups = dict()
+
+        while curr:
+            if curr.data in dups:
+                prev.next = curr.next
+                curr = None
+            else:
+                dups[curr.data] = 1
+                prev = curr
+
+            curr = prev.next
+
 
 linkedList = LinkedList()
 
@@ -187,13 +248,14 @@ linkedList.append("E")
 linkedList.prepend("F")
 linkedList.insertAfterNode(linkedList.head.next, "Q")
 
-print(f"Linked List before reversing :")
+print(f"Linked List before reversing : \n")
 linkedList.printList()
-
-print(f"Linked List after Iterative Reversing : ")
+print("\n")
+print(f"Linked List after Iterative Reversing :\n ")
 linkedList.reverseIterative()
 linkedList.printList()
+print("\n")
 
-print(f"Linked List after Recursive Reversing : ")
+print(f"Linked List after Recursive Reversing : \n")
 linkedList.reverseRecursive()
 linkedList.printList()
