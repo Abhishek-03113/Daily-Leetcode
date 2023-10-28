@@ -178,27 +178,19 @@ class LinkedList:
 
     def MergeSort(self, llist):
         p = self.head
-
         q = llist.head
-
         s = None
-
         if not p:
             return q
-
         if not q:
             return p
-
         if p and q:
             if p.data <= q.data:
                 s = p
-
                 p = s.next
             else:
                 s = q
-
                 q = s.next
-
             newHead = s
 
         while p and q:
@@ -236,6 +228,78 @@ class LinkedList:
                 prev = curr
 
             curr = prev.next
+
+    def nthFromLastNode(self, n):
+        total_len = self.lenIterative()
+
+        curr = self.head
+
+        while curr:
+            if total_len == n:
+                print(curr.data)
+                return curr.data
+
+            total_len -= 1
+
+            curr = curr.next
+
+        if curr is None:
+            return
+
+    def nthFromLastNode2Pointers(self, n):
+        # pointer p will point to head node
+        # pointer q will point n pointers beyond head node
+
+        p = self.head
+        q = self.head
+
+        if n > 0:
+            count = 0
+
+            while q:
+                count += 1
+                if count >= n:
+                    break
+                q = q.next
+
+            if not q:
+                print(str(q) + "is greaterr than number of nodes in list ")
+
+                return
+
+            while p and q.next:
+                p = p.next
+                q = q.next
+            return p.data
+        else:
+            return None
+    
+    # Iterative Implementations 
+    def CountOccurence(self,data):
+        count = 0 
+
+        curr = self.head
+
+        while curr:
+            if curr.data = data:
+                count +=1 
+            curr = curr.next
+
+        return count 
+
+    
+    def CountOccurencesRecursive(self,node,data):
+        if not node:
+            return 0
+        if node.data == data:
+            return 1+ self.CountOccurencesRecursive(node.next,data)
+        else:
+            return self.CountOccurencesRecursive(node.next,data)
+
+    
+    
+
+
 
 
 linkedList = LinkedList()
