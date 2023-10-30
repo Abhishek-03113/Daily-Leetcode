@@ -7,32 +7,37 @@ Topic : Two Pointers, Array, Sorting
 
 """
 
-from typing import List
+"""
+@Abhishek 
+Day 20 
+Topic : Two Pointers , arrays , Sorting 
 
-
+"""
 class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> List:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
         """
+        # Built in functions
+
+        # for j in range(n):
+        #     nums1[m+j] = nums2[j]
+        # nums1.sort()
+
+        # Two pointers 
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
         
-        arr = [0]*(m+n)
-
-        p = 0 
-        q = 0 
-
-        while 
-
-
-
-
-        return nums1
+        while j >= 0:
+            if i >= 0 and nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
+            else:
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
 
 
-test = Solution()
-
-
-nums1 = [1, 2, 3, 4, 5]
-nums2 = [3, 4, 5, 6, 7]
-
-print(test.merge(nums1, len(nums1), nums2, len(nums2)))
+        
+        
