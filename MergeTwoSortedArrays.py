@@ -15,8 +15,16 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
+        
+        arr = [0]*(m+n)
 
-        nums1.append((0) * n)
+        p = 0 
+        q = 0 
+
+        while 
+
+
+
 
         return nums1
 
