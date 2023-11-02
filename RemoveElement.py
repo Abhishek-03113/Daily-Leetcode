@@ -16,3 +16,8 @@ class Solution:
                 count += 1
 
         return count
+
+        # one liner list comprehension
+        nums[:] = [num for num in nums if num != val]
+
+        return len(nums)
