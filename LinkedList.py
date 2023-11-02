@@ -273,33 +273,55 @@ class LinkedList:
             return p.data
         else:
             return None
-    
-    # Iterative Implementations 
-    def CountOccurence(self,data):
-        count = 0 
+
+    # Iterative Implementations
+    def CountOccurence(self, data):
+        count = 0
 
         curr = self.head
 
         while curr:
-            if curr.data = data:
-                count +=1 
+            if curr.data == data:
+                count += 1
             curr = curr.next
 
-        return count 
+        return count
 
-    
-    def CountOccurencesRecursive(self,node,data):
+    def CountOccurencesRecursive(self, node, data):
         if not node:
             return 0
         if node.data == data:
-            return 1+ self.CountOccurencesRecursive(node.next,data)
+            return 1 + self.CountOccurencesRecursive(node.next, data)
         else:
-            return self.CountOccurencesRecursive(node.next,data)
+            return self.CountOccurencesRecursive(node.next, data)
 
-    
-    
+    def rotate(self, k):
+        if self.head and self.head.next:
+            p = self.head
+            q = self.head
 
+            prev = None
+            count = 0
 
+            while p and count < k:
+                prev = p
+
+                p = p.next
+                q = q.next
+
+                count += 1
+            p = prev
+
+            while q:
+                prev = q
+                q = q.next
+
+            q = prev
+
+            q.next = self.head
+            self.head = p.next
+
+            p.next = None
 
 
 linkedList = LinkedList()
@@ -322,4 +344,11 @@ print("\n")
 
 print(f"Linked List after Recursive Reversing : \n")
 linkedList.reverseRecursive()
+linkedList.printList()
+
+print(f"List Before rotation :: \n")
+linkedList.printList()
+
+print(f"List after rotation :: \n")
+linkedList.rotate(3)
 linkedList.printList()
