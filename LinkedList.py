@@ -391,6 +391,9 @@ class LinkedList:
         # tail should be pointing to the head node
         # the previous node to the tail should point to null
 
+    def sumTwoLinkedList(self, llist):
+        pass
+
 
 linkedList = LinkedList()
 
