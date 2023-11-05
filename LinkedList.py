@@ -392,7 +392,34 @@ class LinkedList:
         # the previous node to the tail should point to null
 
     def sumTwoLinkedList(self, llist):
-        pass
+        l1 = self.head
+        l2 = llist.head
+
+        resultList = LinkedList()
+
+        carry = 0
+        while l1 or l2:
+            if not l1:
+                i = 0
+            else:
+                i = l1.data
+            if not l2:
+                j = 0
+            else:
+                j = l2.data
+            s = i + j + carry
+            if s >= 10:
+                carry = 1
+                remainder = s % 10
+                resultList.append(remainder)
+            else:
+                carry = 0
+                resultList.append(s)
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        return resultList
 
 
 linkedList = LinkedList()
