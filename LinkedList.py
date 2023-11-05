@@ -378,8 +378,16 @@ class LinkedList:
             return True
 
     def moveTailToHead(self):
-        tail = self.head
-        prev = None
+        if self.head and self.head.next:
+            last = self.head
+            second_to_last = None
+            while last.next:
+                second_to_last = last
+                last = last.next
+            last.next = self.head
+            second_to_last.next = None
+            self.head = last
+
         # tail should be pointing to the head node
         # the previous node to the tail should point to null
 
