@@ -323,66 +323,6 @@ class LinkedList:
 
             p.next = None
 
-    def isPalindrome(self):
-        s = ""
-        cur = self.head
-
-        while p:
-            s += cur.data
-            p = p.next
-
-        return s == s[::-1]
-
-    def isPalindromeStack(self):
-        cur = self.head
-        stack = []
-
-        while cur:
-            stack.append(cur.data)
-            cur = cur.next
-        cur = self.head
-
-        while cur:
-            data = stack.pop()
-
-            if cur.data != data:
-                return False
-            cur = cur.next
-
-        return True
-
-    def isPalindromeTwoPointer(self):
-        if self.head:
-            p = self.head  # pointer pointing at head of the linked list
-            q = self.head  # pointer pointing at end of the linked list
-
-            prev = []  # for helping q to move to the previous node
-
-            i = 0
-
-            while q:
-                prev.append(q)
-                q = q.next
-                i += 1
-            q = prev[i - 1]
-
-            count = 1
-
-            while count <= i // 2 + 1:
-                if prev[-count].data != p.data:
-                    return False
-                p = p.next
-                count += 1
-            return True
-        else:
-            return True
-
-    def moveTailToHead(self):
-        tail = self.head
-        prev = None
-        # tail should be pointing to the head node
-        # the previous node to the tail should point to null
-
 
 linkedList = LinkedList()
 
