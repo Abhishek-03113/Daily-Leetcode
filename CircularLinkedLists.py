@@ -184,8 +184,11 @@ class CircularLinkedList:
             cur = cur.next 
 
             count -= 1
-            
-        
+
+    
+    def isCircularLinkedList(self,inputList):
+        pass
+    
 
 
 test = CircularLinkedList()
