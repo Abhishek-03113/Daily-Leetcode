@@ -131,6 +131,60 @@ class CircularLinkedList:
         print("\n")
 
         split_list.print_list()
+
+
+    def removeNode(self,node):
+        if self.head == node: 
+            cur = self.head 
+
+            while cur.next != self.head: 
+                cur = cur.next 
+            
+
+            if self.head ==self.head.next: 
+                self.head = None 
+            
+            else:
+                cur.next = self.head.next 
+                self.head = self.head.next 
+
+
+        else:
+
+            cur = self.head
+            prev = None 
+            while cur.next != self.head:
+                prev = cur 
+                cur = cur.next 
+
+                if cur == node:
+                    prev.next = cur.next 
+                    cur = cur.next
+
+    
+    def josephus_circle(self,step):
+
+        cur = self.head 
+
+        length = len(self)
+
+        while length > 1:
+
+            count = 1
+
+            while count != step:
+                cur = cur.next 
+
+                count += 1
+            
+            print("Kill ", str(cur.data))
+
+            self.removeNode(cur)
+
+            cur = cur.next 
+
+            count -= 1
+            
         
 
 
