@@ -73,6 +73,67 @@ class CircularLinkedList:
                         cur = cur.next
 
 
+    def __len__(self):
+        cur = self.head 
+        count = 0 
+
+        while cur:
+            count += 1
+            cur = cur.next 
+
+            if cur == self.head:
+                break 
+        
+
+        return count 
+    
+    def split(self):
+
+        size = len(self)
+
+        if size == 0: 
+            return None 
+        if size == 1:
+            return self.head 
+
+        
+        mid = size // 2
+
+        count = 0 
+
+        prev = None 
+
+        cur = self.head 
+
+        while cur and count < mid:
+
+            count += 1
+            
+            prev = cur 
+
+            cur = cur.next 
+
+        
+        prev.next = self.head 
+
+        split_list = CircularLinkedList()
+
+
+        while cur.next != self.head:
+            split_list.append(cur.data)
+            cur = cur.next 
+        
+        split_list.append(cur.data)
+
+
+        self.print_list()
+
+        print("\n")
+
+        split_list.print_list()
+        
+
+
 test = CircularLinkedList()
 
 test.append("A")
@@ -82,10 +143,19 @@ test.append("C")
 print("### Append ###")
 test.print_list()
 test.prepend("Z")
+print("")
 print("### Prepend ###")
 test.print_list()
+print("")
+
+# test.removeNode("C")
+# print("### Remove ###") 
+# test.print_list()
 
 
-test.removeNode("C")
-print("### Remove ###") 
-test.print_list()
+test.split()
+
+
+print("")
+
+print("Length of the linked list is ",len(test))
