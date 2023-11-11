@@ -187,8 +187,19 @@ class CircularLinkedList:
 
     
     def isCircularLinkedList(self,inputList):
-        pass
-    
+        cur = input_list.head
+
+        if cur.next == input_list.head:
+            return True 
+
+        while cur.next:
+            cur = cur.next
+            if cur.next == input_list.head:
+                return True 
+        
+
+        return False
+
 
 
 test = CircularLinkedList()
