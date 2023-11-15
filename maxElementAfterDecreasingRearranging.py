@@ -7,24 +7,41 @@ Topic : Array
 class Solution:
     def maximumElementAfterDecrementingAndRearranging(self, arr: List[int]) -> int:
 
-        arr = sorted(arr)
-
-        # 2 operations : 
-        # Decrease the value 
-        # Rearrage the numbers 
-
-        if arr[0] != 1:
-                arr[0] = 1 
+        # arr = sorted(arr)
+        # if arr[0] != 1:
+        #         arr[0] = 1 
                 
-        for i in range(1,len(arr)):
+        # for i in range(1,len(arr)):
 
-            if abs(arr[i] - arr[i-1]) > 1:
+        #     if abs(arr[i] - arr[i-1]) > 1:
 
-                arr[i] = arr[i-1] + 1
-                print(i,arr[i],arr[i-1])
+        #         arr[i] = arr[i-1] + 1        
 
-                #  1 , 100 - 1 > 1 --> arr[i] = 1+1 = 2 
-                #  2 , 1000 -2 > 1 --> arr[i] = 2+1 == 3 
+        # return max(arr)
+
+
+        # Editorial Sorting Approach : Very Optimal O(n)
+        # arr.sort()
+        # ans = 1
+        # for i in range(1, len(arr)):
+        #     if arr[i] >= ans + 1:
+        #         ans += 1
+
+        # return ans
+
+        # Editorial Approach with no sorting 
+
+        n = len(arr)
+        counts = [0] * (n + 1)
         
-
-        return max(arr)
+        for num in arr:
+            counts[min(num, n)] += 1
+        
+        ans = 1
+        for num in range(2, n + 1):
+            ans = min(ans + counts[num], num)
+    
+        return ans
+    
+        
+        
