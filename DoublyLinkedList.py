@@ -28,12 +28,17 @@ class DoublyLinkedList:
             newNode = Node(data) 
             self.head = newNode 
         else:
-            
             ## prepend means before the head node so  
             newNode = Node(data)
-            
-            
+            cur = self.head 
+            cur.prev = newNode 
+            newNode.next = cur
+            self.head = newNode
+
 
     def print_list(self):
-        pass
-
+        cur = self.head 
+        while cur: 
+            print(cur.data) 
+            cur = cur.next 
+    
