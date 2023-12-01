@@ -30,11 +30,9 @@ class DoublyLinkedList:
         else:
             ## prepend means before the head node so  
             newNode = Node(data)
-            cur = self.head 
-            cur.prev = newNode 
-            newNode.next = cur
-            self.head = newNode
-
+            self.head.prev = newNode 
+            newNode.next = self.head
+            self.head = newNode 
 
     def print_list(self):
         cur = self.head 
@@ -42,3 +40,20 @@ class DoublyLinkedList:
             print(cur.data) 
             cur = cur.next 
     
+
+
+
+"""Testing""" 
+
+test = DoublyLinkedList() 
+
+test.append("A") 
+test.append("B") 
+test.append("C")
+test.append("D") 
+test.print_list() 
+print("\n")
+test.prepend("F") 
+test.prepend("D")
+print("\n")
+test.print_list()
