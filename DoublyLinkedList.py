@@ -41,6 +41,28 @@ class DoublyLinkedList:
             cur = cur.next 
     
 
+### Add Node After
+
+    def add_node_after(self,key,data): 
+        cur =self.head 
+
+        while cur: 
+
+            if cur.next is None and cur.data == key:
+                self.append(data) 
+                return 
+            elif cur.data == key:
+                newNode = Node(data) 
+                nxt = cur.next 
+                cur.next = newNode
+                newNode.next = nxt
+                newNode.prev = cur 
+                nxt.prev = newNode 
+                return 
+            cur = cur.next
+
+
+### Add Node Before
 
 
 """Testing""" 
@@ -56,4 +78,6 @@ print("\n")
 test.prepend("F") 
 test.prepend("D")
 print("\n")
+test.print_list()
+test.add_node_after("C","K")
 test.print_list()
