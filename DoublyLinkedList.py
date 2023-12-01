@@ -37,7 +37,7 @@ class DoublyLinkedList:
     def print_list(self):
         cur = self.head 
         while cur: 
-            print(cur.data) 
+            print(cur.data,end="") 
             cur = cur.next 
     
 
@@ -63,6 +63,25 @@ class DoublyLinkedList:
 
 
 ### Add Node Before
+    def add_node_before(self,key,data):
+        cur = self.head 
+
+        while cur:
+
+            if cur.prev is None and cur.data == key: 
+                self.prepend(data)  
+            
+            elif cur.data == key: 
+                newNode = Node(data) 
+                prev = cur.prev 
+                
+                prev.next = newNode 
+                cur.prev = newNode
+                newNode.next = cur 
+                newNode.prev = prev
+
+                return
+            cur = cur.next
 
 
 """Testing""" 
@@ -79,5 +98,9 @@ test.prepend("F")
 test.prepend("D")
 print("\n")
 test.print_list()
+print("\n")
 test.add_node_after("C","K")
+test.print_list()
+print("\n")
+test.add_node_before("K","Z")
 test.print_list()
