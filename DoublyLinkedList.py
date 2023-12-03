@@ -103,4 +103,4 @@ test.add_node_after("C","K")
 test.print_list()
 print("\n")
 test.add_node_before("K","Z")
-test.print_list()
+test.print_list(
