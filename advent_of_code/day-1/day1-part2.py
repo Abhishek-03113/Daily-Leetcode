@@ -1,6 +1,7 @@
 import re
-text = open("test.txt", "r")
-calibration_data = text.readlines()
+testfile = open("test.txt",'r')
+
+tests = testfile.readlines()
 
 number_words_to_digits = {
     "zero": 0,
@@ -27,14 +28,16 @@ number_words_to_digits = {
 }
 
 
-def find_all_numbers_with_positions(s, number_words):
+def find_all_numbers(case,number_words):
+
     result = {}
 
-    for word, num in number_words.items():
-        for match in re.finditer(word, s):
-            result.setdefault(match.group(), []).append(match.start())
+    for word,num in number_words.items():
 
-    for match in re.finditer(r"\d", s):
+        for match in re.finditer(word,case):
+            result.setdefault(match.group(),[]).append(match.start())
+    
+    for match in re.finditer(r"\d", case):
         result.setdefault(match.group(), []).append(match.start())
 
     for key in result:
@@ -43,26 +46,29 @@ def find_all_numbers_with_positions(s, number_words):
 
     return result
 
-
 list_of_numbers = []
-for line in calibration_data:
-    line = line.replace("\n", "")
 
-    num_dict = find_all_numbers_with_positions(line, number_words_to_digits)
+for line in tests:
+    line = line.replace("/n","")
+
+    num_dict = find_all_numbers(line,number_words_to_digits)
 
     converted_dict = {}
-    for key, value in num_dict.items():
-        num_key = number_words_to_digits.get(key, key)
 
-        if not isinstance(value, list):
+    for key,value in num_dict.items():
+        num_key = number_words_to_digits.get(key,key)
+
+
+        if not isinstance(value,list):
             value = [value]
-
+        
         converted_dict[num_key] = value
-
+    
     min_index_num = str(min(converted_dict, key=lambda k: min(converted_dict[k])))
     max_index_num = str(max(converted_dict, key=lambda k: max(converted_dict[k])))
+
 
     list_of_numbers.append(int(f"{min_index_num}{max_index_num}"))
 
 
-print(f"Solution Part 2: {sum(list_of_numbers)}")
+print(sum(list_of_numbers))
