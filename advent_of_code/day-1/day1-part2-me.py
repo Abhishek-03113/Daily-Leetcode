@@ -27,3 +27,21 @@ number_words_to_digits = {
     "twenty": 20,
 }
 
+
+def find_all_numbers(case,number_words):
+
+    result = {}
+
+    for word,num in number_words.items():
+
+        for match in re.finditer(word,case):
+            result.setdefault(match.group(),[]).append(match.start())
+    
+    for match in re.finditer(r"\d", s):
+        result.setdefault(match.group(), []).append(match.start())
+
+    for key in result:
+        if len(result[key]) == 1:
+            result[key] = result[key][0]
+
+    return result
