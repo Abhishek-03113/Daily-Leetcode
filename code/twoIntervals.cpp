@@ -27,11 +27,11 @@ int main() {
 		{
 			cout << l1 << " " << r1 <<endl;  
 		}
-		else if (r2 < r1)
+		else if (r2 < l1)
 		{
 			cout << -1 << endl;
 		}
-		
+
 		else{
 			cout << l1 <<" " << r2 << endl;
 		}
