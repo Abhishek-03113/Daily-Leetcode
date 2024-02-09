@@ -2,21 +2,38 @@
 using namespace std ; 
 
 int main() {
-	int n, mid ; cin >> n; 
+	int n = 0 ; cin >> n ; 
 
-	int rows = 2*n;
+	int space = n-1 ; 
 
-	while (rows) 
-	{
-		int mid = 0 
-		for (int i = 1; i<= rows; i++)
-		{
-
+	for (int row = 1; row <=n ; row++){
+		for (int j = 1; j<= space; j++){
+			cout << " ";
 		}
-		cout << endl ; 
+		space--;
 
-		rows--;
+	for (int star = 1; star <= 2* row -1 ; star++)
+	{
+		cout << "*"; 
 	}
-	
+	cout << endl; 
+	}
 
+	space = 0 ;
+
+	for (int row = n ; row >=1 ; row--)
+	{
+		for (int j = 1; j <= space ; j++)
+		{
+			cout << " ";
+		}
+		space++;
+
+		for (int star = 1; star <= 2*row-1; star++)
+		{
+			cout << "*" ; 
+		}
+
+		cout << endl; 
+	}
 }
