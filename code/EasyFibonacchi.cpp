@@ -7,10 +7,10 @@ int main() {
 
 	long long a = 0, b = 1, c = 0; 
 
-	if n == 0:
-		cout << 0 << " ";
-		return 0
-	
+	if( n == 0)
+		{cout << 0 << " ";
+				return 0;
+			}
 		
 	cout << a << " " << b << " " ; 
 
