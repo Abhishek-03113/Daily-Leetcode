@@ -15,7 +15,21 @@ int main() {
 		}
 	}
 
+	long long x; 
 
-	
-	
+	cin >> x; 
+	bool flag = false; 
+	for (long long i = 0 ; i< n; i++)
+	{
+		for (long long j = 0; j < m; j++)
+		{
+			if (arr[i][j] == x) 
+			{
+				
+				flag = true ; 
+			}
+		}
+	}
+	if (!flag) cout << "will take number"; 
+	else cout << "will not take number"; 
 }

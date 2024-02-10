@@ -1,0 +1,48 @@
+Solution For Alphabet Rangolu 
+# Size of rangoli.
+s = 3
+
+# Because in computer science, we start counting from 0.
+# So, we need to subtract 1 from the input.
+c = s - 1
+
+# Create the vertival range of the rangoli.
+# s-1, -s, -1 : the vertical range of the rangoli.
+# s = 3 -> [2, 1, 0, 1, 2]
+for v in map(abs, range(c, -s, -1)):
+    # Per vertical range, we need to calculate the horizontal range.
+    # s = 3
+    # v = 0 -> 2
+    # v = 1 -> 1
+    # v = 2 -> 0
+    r = c - v
+
+    # Create the horizontal ranges of the rangoli.
+    #       [0]
+    #    [1, 0, 1]
+    # [2, 1, 0, 1, 2]
+    #    [1, 0, 1]
+    #       [0]
+    h = map(abs, range(-r, r + 1, 1))
+
+    # Invert the horizontal range.
+    #       [0]
+    #    [0, 1, 0]
+    # [0, 1, 2, 1, 0]
+    #    [0, 1, 0]
+    #       [0]
+    u = map(lambda x: abs(x - r), h)
+
+    #  97 is the ascii code for "a".
+    #  Per iteration we add the ascii code of "a" to the
+    #  numbers in the list.
+    #       [2]         -> [99] : 97 + 2 : chr(99) -> "c"
+    #    [2, 1, 2]      -> [99, 98, 99] : c,b,c
+    # [2, 1, 0, 1, 2]   -> [99, 98, 97, 98, 99] : c,b,a,b,c
+    #    [2, 1, 2]      -> [99, 98, 99] : c,b,c
+    #       [2]         -> [99] : c
+    f = map(lambda x: chr(97 + c - x), u)
+
+    # Join the characters with "-" and center the result.
+    # 4 * (c) + 1 is the width of the rangoli.
+    print("-".join(list(f)).center(4 * (c) + 1, "-"))
