@@ -1,4 +1,4 @@
-#include<bits/stdc++.h> 
+	#include<bits/stdc++.h> 
 using namespace std ; 
 
 int main() {
@@ -15,7 +15,6 @@ int main() {
 		{
 			cin >> arr[i];
 		}
-
 		for (long long i = 0; i < n; i++)
 		{
 			for (long long j = i ; j <n ; j++)
