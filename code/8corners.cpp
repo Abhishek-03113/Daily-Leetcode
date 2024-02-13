@@ -1,37 +1,48 @@
 #include<bits/stdc++.h> 
 using namespace std ; 
+using ll= long long int; 
+#define nl '\n';
 
 int main() {
 
-	long long n,m; 
+	ll n, m, x, y; cin >> n >> m ; 
+	char arr[n+1][m+1];
 
-	cin >> n >> m ; 
-
-	char ar[n][m];
-
-	for (int i = 0; i <= n; i++)
+	for (ll i = 0; i <=n;i++)
 	{
-		for (int j = 0; i <= m ; j++)
+		for (ll j = 0; j <= m ; j++)
 		{
-			if (i==0 || j == 0)
-			{
-				ar[i][j] = '.'; 
+			if (i == 0 || j == 0){
+				arr[i][j] = 'x'; 
 			}
-			cin >> ar[i][j]; 
+			else cin >> arr[i][j] ; 
 		}
 	}
 
-	long long x, y; cin >> x >> y ; 
+	cin >> x >> y ; 
+	
+	// cout << arr[x][y] << nl ; 
+	bool c1,c2,c3,c4,c5,c6,c7,c8; 
+	c1 = arr[x][y-1] == 'x';
+	c2 = arr[x][y+1] == 'x';
 
 
-	for (int i = 1; i <= n; i++)
+	c3 = arr[x-1][y]== 'x';
+	c4 = arr[x+1][y] == 'x';
+
+	c5 = arr[x-1][y-1] == 'x';
+	c6 = arr[x+1][y+1] == 'x';
+	c7 = arr[x+1][y-1] == 'x';
+	c8 = arr[x-1][y+1] == 'x'; 
+
+	// cout << c1 <<  c2 <<  c3 <<  c4 <<  c4 <<  c5 << c6 << c7 << c8;
+
+	if (c1 && c2 && c3 && c4 && c4 && c5 && c6)
 	{
-		for (int j = 1; i <= m ; j++)
-		{
-			
-			cout << ar[i][j] << endl ; 
-		}
+		cout << "YES" << nl; 
 	}
-
+	else cout << "NO" << nl ; 
+	
+	
 
 }
