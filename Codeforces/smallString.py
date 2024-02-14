@@ -1,20 +1,31 @@
 t=int(input()) 
-
 def sol(n):
-    for i in range(1,26):
-        for j in range(1,26):
-            k = n - (i+j)
-            if 1 <= k <= 26:
-                print(chr(i+96),chr(j+96),chr(k+96))
-                    
+    ans = [1,1,1]
+    
+    n-= 3 
+    
+    if n > 0:
+        diff = min(25,n)
+        ans[2] += diff
+        n -= diff 
+    if n > 0:
+        diff = min(25,n)
+        ans[1] += diff
+        n -= diff
+    if n > 0:
+        diff = min(25,n)
+        ans[0] += diff
+        n -= diff 
+            
+    ans[0] = chr(96+ans[0])
+    ans[1] = chr(96+ans[1])
+    ans[2] = chr(96+ans[2])
+    
+    return ''.join(ans)
+
+    
 
 for _ in range(t): 
-
     n = int(input()) 
-    
-    print(n,'\n')
-    # n = 13
     print(sol(n))
 
-    
-       
