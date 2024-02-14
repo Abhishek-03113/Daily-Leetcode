@@ -1,48 +1,101 @@
 #include<bits/stdc++.h> 
 using namespace std ; 
-using ll= long long int; 
+#define int long long
 #define nl '\n';
 
-int main() {
+signed main() {
 
-	ll n, m, x, y; cin >> n >> m ; 
-	char arr[n+1][m+1];
+	
+	int n, m;
+	cin >> n >> m;
 
-	for (ll i = 0; i <=n;i++)
-	{
-		for (ll j = 0; j <= m ; j++)
-		{
-			if (i == 0 || j == 0){
-				arr[i][j] = 'x'; 
-			}
-			else cin >> arr[i][j] ; 
+
+	vector<string> v(n);
+
+
+	for(auto &i : v){
+		cin >> i;
+	}
+
+
+	int x, y;
+
+	cin >> x >> y;
+
+
+	x--;
+	y--;
+	int ct = 0;
+	if(true){
+		if(v[x + 1][y + 1] == 'x'){
+			ct++;
 		}
 	}
-
-	cin >> x >> y ; 
-	
-	// cout << arr[x][y] << nl ; 
-	bool c1,c2,c3,c4,c5,c6,c7,c8; 
-	c1 = arr[x][y-1] == 'x';
-	c2 = arr[x][y+1] == 'x';
-
-
-	c3 = arr[x-1][y]== 'x';
-	c4 = arr[x+1][y] == 'x';
-
-	c5 = arr[x-1][y-1] == 'x';
-	c6 = arr[x+1][y+1] == 'x';
-	c7 = arr[x+1][y-1] == 'x';
-	c8 = arr[x-1][y+1] == 'x'; 
-
-	// cout << c1 <<  c2 <<  c3 <<  c4 <<  c4 <<  c5 << c6 << c7 << c8;
-
-	if (c1 && c2 && c3 && c4 && c4 && c5 && c6)
-	{
-		cout << "YES" << nl; 
+	else{
+		ct++;
 	}
-	else cout << "NO" << nl ; 
-	
-	
+	if(true){
+		if(v[x + 1][y] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(true){
+		if(v[x][y + 1] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(x - 1 >= 0 && y - 1 >= 0){
+		if(v[x - 1][y - 1] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(x - 1 >= 0){
+		if(v[x - 1][y] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(y - 1 >= 0){
+		if(v[x][y - 1] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(y - 1 >= 0){
+		if(v[x + 1][y - 1] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
+	if(x - 1 >= 0){
+		if(v[x - 1][y + 1] == 'x'){
+			ct++;
+		}
+	}
+	else{
+		ct++;
+	}
 
+
+	if(ct == 8){
+		cout << "yes" << endl;
+	}
+	else{
+		cout << "no" << endl;
+	}
 }
