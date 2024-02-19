@@ -1,18 +1,22 @@
+ans = []
+
 t = int(input())
 
-for _ in range(t):
+for i in range(t):
     n = int(input())
     a = list(map(int, input().split()))
-    y = a[0]
-
-    for i in range(1, n):
-        if a[i] > y:
-            y = a[i]
-        else:
-            j = 1
-            temp = a[i]
-            while a[i] <= y:
-                a[i] = temp * j
-                j += 1
-            y = a[i]
-    print(y)
+    year = 0
+    for y in a:
+        year += 1
+        if not year:
+            year = y
+            continue
+        if y >= year:
+            year = y
+ 
+        elif y < year:
+            
+            year = (year-1)//y*y+y
+ 
+    ans.append(year)
+print(*ans,  sep="\n")
