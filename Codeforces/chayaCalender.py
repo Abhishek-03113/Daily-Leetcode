@@ -15,7 +15,6 @@ for i in range(t):
             year = y
  
         elif y < year:
-            
             year = (year-1)//y*y+y
  
     ans.append(year)
