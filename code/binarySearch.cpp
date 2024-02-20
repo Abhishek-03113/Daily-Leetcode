@@ -1,14 +1,12 @@
 #include<bits/stdc++.h> 
+// #define int long long
+#define nl endl; 
 using namespace std ; 
 
-void binarySearch(n){
-	
 
-}
-
-int main() {
-
-	long long n, q, A[n]; cin >> n >> q; 
+signed main() {
+	int n, q ; cin >> n >> q; 
+	int A[n] ;
 
 	for (int i = 0; i < n ; i++)
 	{
@@ -16,25 +14,35 @@ int main() {
 	}
 
 	sort(A,A+n); 
-	int mid = n/2; 
 
-	while(q--)
+	while (q--)
 	{
-		long long x; cin >> x;
+		int x ; cin >> x; 
+		int start = 0, end = n-1; 	
+		bool flag = false; 
 
-		if (x <= mid){
-			for (int i = 0; i < mid; i++){
+	while (start <= end)
+	{
+		int mid = start + (end - start) / 2 ; 
 
-			}
+		if (A[mid] == x)
+		{
+			flag = true; 
+			break; 
 		}
-
-
+		else if (A[mid] > x)
+		{ 
+			end = mid-1; 
+		}
+		else{
+			start = mid + 1 ; 
+		}
 	}
 
+	if (flag == true){ cout << "found" << nl ; }
+	else 
+	{cout << "not found" << nl; }
 
 
-
-
-	
-
+}
 }
