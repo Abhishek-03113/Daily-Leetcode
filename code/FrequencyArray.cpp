@@ -5,23 +5,20 @@ using namespace std ;
 
 signed main(){
     int n, m; cin >> n >> m ; 
-
     int arr[n];
+    vector<int> freq (m+1, 0); 
+    for (int i = 0; i<n; i++)
+    {
+        int x = 0; cin >> x;
 
-    for (int i =0; i < n ; i++){
-        cin >> arr[i] ; 
-    }
-
-    for (int j = 1; j <= m; j++){    
-        int freq =  0; 
-
-        for (int i = 0; i<n; i++)
+        if (x<=m)
         {
-            if (arr[i] == j){
-                freq++; 
-            }
+            freq[x]++;
         }
-        cout << freq << nl; 
+    }
+    for(int i= 1; i<=m;i++)
+    {
+        cout << freq[i] << nl ; 
     }
 
 }
