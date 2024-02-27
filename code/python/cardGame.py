@@ -1,3 +1,4 @@
+from collections import defaultdict
 t = int(input())
 
 for _ in range(t):
@@ -8,10 +9,8 @@ for _ in range(t):
 
     a = list(input().split()) 
     
-    a = sorted(a)
-
-    flag = False 
     
-    pairs = []
+    
+
     
     
