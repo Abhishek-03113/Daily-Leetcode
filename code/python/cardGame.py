@@ -26,7 +26,7 @@ for _ in range(t):
             
         if len(h[i]) % 2 == 0:
             for j in range(len(h[i])):
-                temp = h[i].pop(j)
+                temp = h[i].
                 print(f"{i}{temp}", end=" ")
                 
             print("")
