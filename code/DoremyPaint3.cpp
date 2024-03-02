@@ -2,20 +2,8 @@
 using namespace std;
 #define int long long
 #define nl '\n';
-
-void solve(){
-    int n ; cin >> n; 
-    vector<int> a(n); 
-
-    for (int i = 0; i< n; i++){
-        cin >> a[i];
-    }
-
-    
-
-
-
-}
+#define yes cout << "YES" << nl ; 
+#define no cout << "NO" << nl; 
 
 signed main()
 {
@@ -23,7 +11,25 @@ signed main()
 
     while (t--)
     {
-        solve(); 
+        int n; cin >> n; 
+        map<int, int> occ; 
+
+        for (int i =1 ; i<=n;++i){
+            int x; cin >> x;
+            occ[x]++; 
+        }
+
+        if (occ.size() >= 3){
+            puts("NO"); 
+        }
+        else{
+            if (abs(occ.begin()->second - occ.rbegin()->second) <=1){
+                puts("YES"); 
+            }
+            else{
+                puts("NO");
+            }
+        }
     }
     
   
