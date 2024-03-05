@@ -8,7 +8,15 @@ using namespace std;
 
 signed main(){
 
+    int t ; cin >> t; 
+
+    while (t--)
+    {
+        /* code */
+        
+    }
     
+
 
 
 }
