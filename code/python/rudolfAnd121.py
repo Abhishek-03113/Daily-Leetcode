@@ -21,7 +21,7 @@ for _ in range(int(input())):
     n = int(input())
     a = list(map(int, input().split())) 
     
-    if count_consecutive_same_odds(a) % 2 == 0: 
+    if count_consecutive_same_odds(a) % 2 == 0 and count_consecutive_same_odds(a) < 3: 
         print("YES")
     else:
         print("NO")
