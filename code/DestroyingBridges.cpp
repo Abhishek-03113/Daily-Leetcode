@@ -8,17 +8,7 @@ using namespace std;
 
 signed main(){
 
-	int tc; cin >> tc; 
-
-	while(tc--){
-
-		int n, k; 
-		cin >> n >> k ; 
-
-		
-
-
-	}
-
+	int c = 2ll * 5; 
+	cout << c; 
 
 }
