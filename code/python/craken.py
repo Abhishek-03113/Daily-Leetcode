@@ -20,7 +20,7 @@ for _ in range(int(input())):
             a[-1] -= m 
             k -= 2*m 
         
-        
+    
         if a[0] == 0:
             a.popleft()
         
