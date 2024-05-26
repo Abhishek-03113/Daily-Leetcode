@@ -1,18 +1,14 @@
-# for _ in range(int(input())):
-    
-n = int(input())
+n, k  = map(int, input().split()) 
 
-ans = 0
-for _ in range(n):
-    
-    op = input() 
-    
-    if '+' in op:
+a = list(map(int, input().split())) 
+
+min_ = a[k-1] 
+
+ans = 0     
+
+for i in range(n):
+    if a[i] >= min_ and a[i] > 0:
         ans += 1 
-    else:
-        ans -= 1 
-    
-print(ans)
-    
-    
-    
+        
+        
+print(ans)   
