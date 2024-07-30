@@ -7,9 +7,9 @@ using namespace std;
 #define S second
 #define pb push_back
 #define mp make_pair
-#define for(i, n) for (int i = 0; i < n; i++)
-#define forr(i, n) for (int i = n - 1; i >= 0; i--)
-#define for(i, n, step) for (int i = 0; i < n; i += step)
+// #define for(i, n) for (int i = 0; i < n; i++)
+// #define forr(i, n) for (int i = n - 1; i >= 0; i--)
+// #define for(i, n, step) for (int i = 0; i < n; i += step)
 #define V vector<int>
 #define P pair<int, int>
 #define all(x) x.begin(), x.end()
@@ -18,8 +18,9 @@ using namespace std;
 
 void solve()
 {
-    int n;
-    cin >> n;
+    for (int i= 0; i< 5; i++, i/=2){
+        cout << "SUCC" ; 
+    }
 }
 
 signed main()

@@ -1,28 +1,26 @@
-# Function to calculate maximum total sales
-def sol(N, sales):
-    max_ = sales[0] * 2
-    total_ = sales[0]
-
-    for i in range(1, N):
-        val = sales[i]
-        mul = val * 2
-
-       
-        sum2 = total_ + mul
-        total_ += val
-
-        if sum2 > max_:
-            max_ = sum2
-
-    return max_
-
-def main():
-    t = int(input())
-
-    for _ in range(t):
-        n = int(input())
-        sales = list(map(int, input().split()))
-        print(sol(n, sales))
-
-if __name__ == "__main__":
-    main()
+for _ in range(int(input())):
+    
+    N = int(input()) 
+    A = list(map(int, input().split())) 
+    results = []
+    from collections import Counter
+    freq = list(Counter(A).values())
+    total_distinct = len(freq)
+    dp = [False] * (N + 1)
+    dp[0] = True
+    
+    for count in freq:
+        for j in range(N, count - 1, -1):
+            if dp[j - count]:
+                dp[j] = True
+    
+    max_k = 0
+    
+    for k in range(N, 0, -1):
+        if dp[k] and k % total_distinct == 0:
+            max_k = k
+            break
+    
+    results.append(max_k)
+    
+    print(*results)
