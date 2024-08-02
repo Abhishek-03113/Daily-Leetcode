@@ -11,4 +11,7 @@ signed main(){
 	int c = 2ll * 5; 
 	cout << c; 
 
+	string a = "Hello" ; 
+
+	cout << a.length() ; 
 }
