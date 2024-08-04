@@ -11,6 +11,13 @@ def solve():
 
     mid = n // 2
     sort = True 
+    rev = True
+    
+    for i in range(n):
+        if p[i] != n - i:
+            rev = False
+            break
+    
     for i in range(n):
         if p[i] != i + 1:
             sort = False
@@ -18,7 +25,8 @@ def solve():
         
     if sort:
         print(0)
-        
+    elif rev:
+        print(3)
     elif p[mid] == mid + 1:
         print(1)
     else:
