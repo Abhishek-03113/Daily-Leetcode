@@ -1,28 +1,17 @@
-def help(num):
-    count = 0
-    
-    while num:
-        num = round(num/3)
-    
-        count += 1 
-    
-    return count 
 import math 
 
-def divisible(num):
+def help(num):
     pass
     
-
 def solve():
-    # l, r = map(int, input().split())
-
-    count = 0
-    temp = 199999
-    other = 200000
+    x,y,k = map(int, input().split())
     
-    print(math.log(other) // math.log(3))
+    for i in range(0, k - k % 2):
+        print(x - ((1 if i % 2 != 0 else -1) * (i//2 + 1)), y) 
+        
+    if k % 2 != 0:
+        print(x, y)
+        
     
-    
-    # print(ans)
 for _ in range(int(input())):
     solve()
