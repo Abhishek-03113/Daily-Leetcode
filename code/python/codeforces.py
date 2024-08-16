@@ -3,46 +3,25 @@ def solve():
     n,k = map(int, input().split()) 
     a = list(map(int,input().split())) 
     
-    # a, b = map(int, input().split())
-    # c, d = map(int, input().split())
-
-    # ans = 0
-
-    # # print(f"Alice {a, b}  bob {c , d}")
-    # if a == c:
-
-    #     if b == d:
-    #         print(b - a)
-    #         return
-
-    #     print(min(b, d) - a + 1)
-
-    # elif a < c:
-
-    #     if b < c:
-    #         print(c - b)
-    #         return
-    #     elif b == c:
-    #         print(1)
-    #     elif b > c:
-    #         if b == d:
-    #             print(b - c + 1)
-
-    #         elif b > d:
-    #             print(b - c)
-
-    # elif a > c:
-
-    #     if d > b:
-    #         print(3)
-    #         return
-    #     elif d == b:
-    #         print(d - c + 1)
-    #         return
-    #     else:
-    #         print(d - c + 1)
-    #         return
-
+    a.sort(reverse=True) 
+    
+    for i in range(1,n):
+        if i % 2 != 0:
+            if k >= a[i-1] - a[i]:
+                a[i] += a[i-1] - a[i]  
+                k -= a[i-1] - a[i] 
+            else:
+                a[i] += k 
+                k = 0 
+    alice = 0
+    bob = 0
+    for i in range(n):
+        if i % 2 == 0:
+            alice += a[i] 
+        else:
+            bob += a[i] 
+    
+    print(alice - bob)
 
 for _ in range(int(input())):
     solve()
