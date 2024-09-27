@@ -1,27 +1,35 @@
+import bisect
+
 def solve():
+    # Read number of test cases
+    t = int(input())
+    
+    for _ in range(t):
+        # Read n (number of cells), m (number of teachers), q (number of queries)
+        n, m, q = map(int, input().split())
+        
+        # Read the positions of the teachers
+        teacher_positions = list(map(int, input().split()))
+        teacher_positions.sort()
+        
+        david_positions = list(map(int, input().split()))
+        
+        
+        for david_pos in david_positions:
+            idx = bisect.bisect_left(teacher_positions, david_pos)
+            
+            min_moves = float('inf')
+            
+            if idx == 0:
+                min_moves = teacher_positions[idx] - 1  # Move to the left
+            
+            if idx > 0:
+                min_moves = min(min_moves, abs(david_pos - teacher_positions[idx - 1]))
+            
+            if 0< idx < m:
+                min_moves = min(min_moves, abs(david_pos - teacher_positions[idx]))
+            
+            print(min_moves)
 
-    n,k = map(int, input().split()) 
-    a = list(map(int,input().split())) 
-    
-    a.sort(reverse=True) 
-    
-    for i in range(1,n):
-        if i % 2 != 0:
-            if k >= a[i-1] - a[i]:
-                a[i] += a[i-1] - a[i]  
-                k -= a[i-1] - a[i] 
-            else:
-                a[i] += k 
-                k = 0 
-    alice = 0
-    bob = 0
-    for i in range(n):
-        if i % 2 == 0:
-            alice += a[i] 
-        else:
-            bob += a[i] 
-    
-    print(alice - bob)
-
-for _ in range(int(input())):
-    solve()
+# Driver code to execute the solution
+solve()
