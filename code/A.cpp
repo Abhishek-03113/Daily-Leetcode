@@ -1,43 +1,24 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
+using namespace std;
 
-using i64 = long long;
-
-void solve() {
+void solve(){
     int n;
-    std::cin >> n;
-    
-    std::vector<int> a(n), b(n + 1);
-    for (int i = 0; i < n; i++) {
-        std::cin >> a[i];
+    cin >> n;
+    vector<int>b(n-1), a;
+    for(int i = 0; i < n - 1; i++) cin >> b[i];
+    a.emplace_back(b[0]);
+    for(int i = 0; i < n - 2; i++){
+        a.emplace_back(min(b[i], b[i + 1]));
     }
-    for (int i = 0; i <= n; i++) {
-        std::cin >> b[i];
-    }
-    
-    i64 ans = 1E9;
-    for (int i = 0; i < n; i++) {
-        ans = std::min<int>(ans, std::abs(a[i] - b[n]));
-        ans = std::min<int>(ans, std::abs(b[i] - b[n]));    
-        if (std::min(a[i], b[i]) <= b[n] && b[n] <= std::max(a[i], b[i])) {
-            ans = 0;
-        }
-    }
-    for (int i = 0; i < n; i++) {
-        ans += std::abs(a[i] - b[i]);
-    }
-    std::cout << ans + 1 << "\n";
+    a.emplace_back(b[n - 2]);
+    for(auto &i : a) cout << i << ' ';
+    cout << "\n";
 }
-
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    
+int main(){
     int t;
-    std::cin >> t;
-    
-    while (t--) {
+    cin >> t;
+    while(t--){
         solve();
     }
-    
     return 0;
 }

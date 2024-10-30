@@ -1,35 +1,27 @@
 #include <bits/stdc++.h>
-#include <cstring>
-#include <iostream>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
 using namespace std;
 
 
 #define int long long
 #define nl '\n'
-#define F first
-#define S second
-#define pb push_back
-#define mp make_pair
-#define V vector<int>
-#define P pair<int, int>
-#define all(x) x.begin(), x.end()
+// #define F first
+// #define S second
+// #define pb push_back
+// #define mp make_pair
+// #define V vector<int>
+// #define P pair<int, int>
 #define mod 1000000007
 #define inf 1e18
+#define print(x) for (int i= 0; i < x.size(); i++) cout << x[i] << " "; 
 
-
-signed main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+void solve(){
     
-    int a = 1000; 
-
-    int b = htons(a); 
-
-    cout << b << " " << a << endl; 
-     
+}
+signed main(){
+    int t;
+    cin >> t;
+    while(t--){
+        solve();
+    }
+    return 0;
 }
