@@ -1,38 +1,38 @@
-def upper_bound(a, x): 
-    l = 0 
-    r = len(a) 
-    while l < r: 
-        m = (l + r) // 2 
-        if a[m] <= x: 
-            l = m + 1 
-        else: 
-            r = m 
-            
-    if l - 1 < 0: 
-        return -1
-    return l   
+ 
+I = lambda: map(int, input().strip().split())
+L = lambda: list(map(int, input().split()))
 
 
 def solve():
-    n, m = map(int, input().split()) 
+    n = int(input()) 
+    a = L() 
     
-    a = list(map(int, input().split())) 
-    b = list(map(int, input().split()))  
+    visited = set() 
     
-    a.sort()
+    ans = 0 
+    curr = 0
     
-    for i in range(m): 
-        ans = (upper_bound(a, b[i]))  
-        
-        if ans <= 0: 
-            print(-1) 
+    
+    for i in range(len(a)): 
+        if a[i] not in visited: 
+            curr += 1 
+            visited.add(a[i]) 
         else: 
-            if ans > 0:
-                print(a[ans - 1])
-                a[ans - 1] = float('inf')
-            
+            curr = max(curr, 1)
+    
+        print(visited, " ", curr, " ", ans)
+        ans = max(ans, curr) 
 
+    print(ans)
+            
+    
+        
+        
+        
+        
         
 solve() 
 
-# for _ in range(int(input())):solve()    
+# for _ in range(int(input())):
+#     solve() 
+
