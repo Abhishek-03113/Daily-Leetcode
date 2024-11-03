@@ -1,38 +1,22 @@
- 
-I = lambda: map(int, input().strip().split())
-L = lambda: list(map(int, input().split()))
+def helper(ind, n, yn, memo):    
+    if ind in memo:
+        return memo[ind]
+    if ind == n:
+        return 0
+    if yn[ind] < 0:
+        memo[ind] = helper(ind + 1, n, yn, memo)
+    else:
+        memo[ind] = yn[ind]*yn[ind] + helper(ind + 1, n, yn, memo)
+    return memo[ind]
 
 
-def solve():
-    n = int(input()) 
-    a = L() 
-    
-    visited = set() 
-    
-    ans = 0 
-    curr = 0
-    
-    
-    for i in range(len(a)): 
-        if a[i] not in visited: 
-            curr += 1 
-            visited.add(a[i]) 
-        else: 
-            curr = max(curr, 1)
-    
-        print(visited, " ", curr, " ", ans)
-        ans = max(ans, curr) 
+def main(): 
+    tests = int(input())
+    for _ in range(tests):
+        n = int(input())
+        yn = list(map(int, input().split()))  
+        memo = {}
+        print(helper(0, n, yn, memo))
 
-    print(ans)
-            
-    
-        
-        
-        
-        
-        
-solve() 
-
-# for _ in range(int(input())):
-#     solve() 
-
+if __name__ == "__main__":
+    main()
