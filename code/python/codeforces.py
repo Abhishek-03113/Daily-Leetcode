@@ -1,26 +1,43 @@
-import math
-from collections import Counter
+n, k = map(int, input().split())
+s = input()
 
-def solve(n, m, r, b):
-    red = {}
-    for xi, ui in r:
-        prod = xi * ui
-        if prod in red:
-            red[prod] += 1
-        else:
-            red[prod] = 1
+target = k - 1
 
-    ans = 0
-    for yi, vi in b:
-        prod = yi * vi
-        if prod in red and red[prod] > 0:
-            ans += 1
-            red[prod] -= 1  
+ans = []
+swap = []
 
-    return ans
+ones = 0
+cnt = 0
 
-n, m = map(int, input().split())
-r = [tuple(map(int, input().split())) for _ in range(n)]
-b = [tuple(map(int, input().split())) for _ in range(m)]
+ind = 0
 
-print(solve(n, m, r, b))
+for i in range(n):
+
+    if s[i] == "1":
+        ones += 1
+    else:
+        if ones > 0:
+            cnt += 1
+            ones = 0
+
+    if cnt < target:
+        ans.append(s[i])
+    else:
+        swap.append(s[i])
+
+
+for i in range(len(swap)):
+
+    if swap[i] == "1":
+        swap[i] = -1
+        ans.append("1")
+
+    elif swap[i] == "0" and swap[i - 1] == -1:
+        break
+
+for i in range(len(swap)):
+
+    if swap[i] != -1:
+        ans.append(swap[i])
+
+print(''.join(ans))
