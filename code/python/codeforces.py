@@ -1,43 +1,76 @@
-n, k = map(int, input().split())
-s = input()
+# for _ in range(int(input())):
+#     n, k = map(int, input().split())
 
-target = k - 1
+#     ks = []
+#     for _ in range(k):
+#         l, r, m = map(int, input().split())
+#         ks.append((l, r, m))
 
-ans = []
-swap = []
+#     ans = [n] * n
+#     flg = True 
+    
+    
 
-ones = 0
-cnt = 0
+#     for l, r, m in ks:
+#         l -= 1;r -= 1
 
-ind = 0
+#         if ans[l] <= m:
+#             if m > 1:
+#                 ans[l] = m - 1
+#             else:
+#                 flag = False
+#                 for i in range(l, r + 1):
+#                     if ans[i] == m:
+#                         flag = True
+#                         if m + 1 <= n:
+#                             ans[i] = m + 1
+#                         break
+#                 if not flag:
+#                     flg = False
+#                     break
 
-for i in range(n):
+#     if flg:
+#         for l, r, m in ks:
+#             l -= 1
+#             r -= 1
+#             if ans[l] == m:
+#                 flg = False
+#                 break
 
-    if s[i] == "1":
-        ones += 1
+#     if flg:
+#         print(*ans)
+#     else:
+#         print(-1)
+for _ in range(int(input())):
+    n, k = map(int, input().split())
+    ks = [tuple(map(int, input().split())) for _ in range(k)]
+    arr = [n] * n
+    flg = True
+    for l, r, m in ks:
+        l -= 1
+        r -= 1
+        if min(arr[l:r + 1]) <= m:
+            if m > 1:
+                arr[l] = m - 1
+            else:
+                flag = False
+                for i in range(l, r + 1):
+                    if arr[i] == m:
+                        if m + 1 <= n:
+                            arr[i] = m + 1
+                        flag = True
+                        break
+                if not flag:
+                    flg = False
+                    break
+    if flg:
+        for l, r, m in ks:
+            l -= 1
+            r -= 1
+            if min(arr[l:r + 1]) == m:
+                flg = False
+                break
+    if flg:
+        print(*arr)
     else:
-        if ones > 0:
-            cnt += 1
-            ones = 0
-
-    if cnt < target:
-        ans.append(s[i])
-    else:
-        swap.append(s[i])
-
-
-for i in range(len(swap)):
-
-    if swap[i] == "1":
-        swap[i] = -1
-        ans.append("1")
-
-    elif swap[i] == "0" and swap[i - 1] == -1:
-        break
-
-for i in range(len(swap)):
-
-    if swap[i] != -1:
-        ans.append(swap[i])
-
-print(''.join(ans))
+        print(-1)

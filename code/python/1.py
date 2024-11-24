@@ -1,24 +1,48 @@
-from bisect import bisect_right
-
-def solve(n, k, a):
-    a.sort(reverse=True)
-    cnt = [0]*(n+1)
-    for i in range(n):
-        if a[i] % k == 0:
-            cnt[i+1] = cnt[i] + 1
+def solve_test_case(N, K, constraints):
+    forbidden_values = [set() for _ in range(N)]  # positions 0 to N-1
+    for L, R, m in constraints:
+        L -= 1
+        R -= 1
+        for i in range(L, R + 1):
+            forbidden_values[i].add(m)
+    A = [0] * N
+    for i in range(N):
+        for v in range(1, N + 1):
+            if v not in forbidden_values[i]:
+                A[i] = v
+                break
         else:
-            cnt[i+1] = cnt[i]
-    l, r = 0, n+1
-    while r - l > 1:
-        mid = (l + r) // 2
-        if cnt[bisect_right(a, mid)] * k >= mid:
-            l = mid
-        else:
-            r = mid
-    return l
+            return [-1]
+    return A
 
-t = int(input())
-for _ in range(t):
-    n, k = map(int, input().split())
-    a = list(map(int, input().split()))
-    print(solve(n, k, a))
+def solve_all_cases(T, test_cases):
+    results = []
+    for N, K, constraints in test_cases:
+        result = solve_test_case(N, K, constraints)
+        results.append(result)
+    return results
+
+def process_input():
+    T = int(input())
+    test_cases = []
+    for _ in range(T):
+        N, K = map(int, input().split())
+        constraints = []
+        for _ in range(K):
+            L, R, m = map(int, input().split())
+            constraints.append((L, R, m))
+        test_cases.append((N, K, constraints))
+    return T, test_cases
+
+def main():
+    T, test_cases = process_input()
+    results = solve_all_cases(T, test_cases)
+
+    for result in results:
+        if result[0] == -1:
+            print(-1)
+        else:
+            print(*result)
+
+if __name__ == "__main__":
+    main()
