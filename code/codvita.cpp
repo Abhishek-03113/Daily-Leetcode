@@ -1,67 +1,96 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <climits>
-
+#include <bits/stdc++.h>
 using namespace std;
+#define ll long long
+#define all(v) v.begin(), v.end()
+#define mod 998244353
+#define pb push_back
+#define fi first
+#define se second
+#define sz(x) ((int)(x).size())
 
-struct Flight {
-    string from, to;
-    int takeoff, landing, cost;
-};
+void spicyy() {
+    int n, k;
+    cin >> n >> k;
 
-int flightOptimization(vector<Flight>& flights, string start, string end, int startTime, int endTime) {
-    int n = flights.size();
-    vector<vector<pair<int, int>>> dp(n + 1, vector<pair<int, int>>(1441, {INT_MAX, -1}));
-    dp[0][startTime] = {0, -1};
+    vector<int> arr(n, n);  
+    vector<pair<pair<int, int>, int>> constraints(k);
 
-    for (int i = 1; i <= n; i++) {
-        for (int t = 0; t <= 1440; t++) {
-            if (dp[i - 1][t].first != INT_MAX) {
-                if (flights[i - 1].from == start && flights[i - 1].takeoff >= t && flights[i - 1].landing <= endTime) {
-                    dp[i][flights[i - 1].landing] = min(dp[i][flights[i - 1].landing], {dp[i - 1][t].first + flights[i - 1].cost, i - 1});
+    
+    for (int i = 0; i < k; i++) {
+        int l, r, m;
+        cin >> l >> r >> m;
+        constraints[i] = {{l - 1, r - 1}, m};  
+    }
+
+    bool possible = true;
+
+    
+    for (const auto& constraint : constraints) {
+        int l = constraint.fi.fi, r = constraint.fi.se, m = constraint.se;
+
+        bool fixed = false;
+
+        for (int i = l; i <= r; i++) {
+            if (arr[i] <= m) {
+                if (m > 1) {
+                    arr[i] = m - 1;
+                } else {
+                    fixed = false;
+                    for (int j = l; j <= r; j++) {
+                        if (arr[j] == m) {
+                            if (m + 1 <= n) arr[j] = m + 1;
+                            fixed = true;
+                            break;
+                        }
+                    }
+                    if (!fixed) {
+                        possible = false;
+                        break;
+                    }
                 }
-                if (flights[i - 1].to == end && flights[i - 1].landing <= endTime) {
-                    dp[i][flights[i - 1].landing] = min(dp[i][flights[i - 1].landing], dp[i - 1][t]);
+            }
+        }
+        if (!possible) break;
+    }
+
+    
+    if (possible) {
+        for (const auto& constraint : constraints) {
+            int l = constraint.fi.fi, r = constraint.fi.se, m = constraint.se;
+
+            bool valid = false;
+            for (int i = l; i <= r; i++) {
+                if (arr[i] == m) {
+                    valid = true;
+                    break;
                 }
+            }
+            if (valid) {
+                possible = false;
+                break;
             }
         }
     }
 
-    int minCost = INT_MAX, lastFlight = -1;
-    for (int t = 0; t <= 1440; t++) {
-        if (dp[n][t].first < minCost && dp[n][t].first != INT_MAX) {
-            minCost = dp[n][t].first;
-            lastFlight = dp[n][t].second;
+    
+    if (!possible) {
+        cout << -1 << endl;
+    } else {
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
         }
+        cout << endl;
     }
-
-    if (minCost == INT_MAX) {
-        return -1;
-    }
-
-    return minCost;
 }
 
 int main() {
-    int n;
-    cin >> n;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    vector<Flight> flights(n);
-    for (int i = 0; i < n; i++) {
-        cin >> flights[i].from >> flights[i].to >> flights[i].takeoff >> flights[i].landing >> flights[i].cost;
-    }
-
-    string start, end;
-    int startTime, endTime;
-    cin >> start >> end >> startTime >> endTime;
-
-    int minCost = flightOptimization(flights, start, end, startTime, endTime);
-
-    if (minCost == -1) {
-        cout << "Impossible" << endl;
-    } else {
-        cout << minCost << endl;
+    int t;
+    cin >> t;
+    while (t--) {
+        spicyy();
     }
 
     return 0;

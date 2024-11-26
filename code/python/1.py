@@ -1,48 +1,41 @@
-def solve_test_case(N, K, constraints):
-    forbidden_values = [set() for _ in range(N)]  # positions 0 to N-1
-    for L, R, m in constraints:
-        L -= 1
-        R -= 1
-        for i in range(L, R + 1):
-            forbidden_values[i].add(m)
-    A = [0] * N
-    for i in range(N):
-        for v in range(1, N + 1):
-            if v not in forbidden_values[i]:
-                A[i] = v
-                break
-        else:
-            return [-1]
-    return A
+def solve():
+    import sys
+    input = sys.stdin.read
+    data = input().split()
+    
+    N = int(data[0])
+    A = list(map(int, data[1:]))
+    
+    def is_1122(freq_map):
+        """Check if the current frequency map satisfies the 1122 condition."""
+        for count in freq_map.values():
+            if count != 0 and count != 2:
+                return False
+        return True
+    
+    left = 0
+    freq_map = {}
+    max_len = 0
 
-def solve_all_cases(T, test_cases):
-    results = []
-    for N, K, constraints in test_cases:
-        result = solve_test_case(N, K, constraints)
-        results.append(result)
-    return results
+    for right in range(N):
+        # Include A[right] in the current window
+        freq_map[A[right]] = freq_map.get(A[right], 0) + 1
+        
+        # Ensure the window is valid
+        while not is_1122(freq_map):
+            # Remove A[left] from the window
+            freq_map[A[left]] -= 1
+            if freq_map[A[left]] == 0:
+                del freq_map[A[left]]
+            left += 1
+        
+        # Update max_len if the current window is valid
+        if is_1122(freq_map):
+            max_len = max(max_len, right - left + 1)
+    
+    print(max_len)
 
-def process_input():
-    T = int(input())
-    test_cases = []
-    for _ in range(T):
-        N, K = map(int, input().split())
-        constraints = []
-        for _ in range(K):
-            L, R, m = map(int, input().split())
-            constraints.append((L, R, m))
-        test_cases.append((N, K, constraints))
-    return T, test_cases
+solve() 
 
-def main():
-    T, test_cases = process_input()
-    results = solve_all_cases(T, test_cases)
-
-    for result in results:
-        if result[0] == -1:
-            print(-1)
-        else:
-            print(*result)
-
-if __name__ == "__main__":
-    main()
+def calculateWomanSalary(MenSalary):
+    return 

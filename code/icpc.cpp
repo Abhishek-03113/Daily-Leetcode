@@ -7,58 +7,83 @@ using namespace std;
 #define fi first
 #define se second
 #define sz(x) ((int)(x).size())  
-
+/*
 void spicyy()
 {
-    int n, k;
-    cin >> n >> k;
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) cin >> a[i];
-
-    sort(a.begin(),a.end());
-
-    vector<ll> pre(n, 0);
-    vector<ll> ans(n + 1, 0);
-
-    pre[0] = a[0];
-    ans[0] = a[0];
-
-    for (int i = 1; i < n; ++i)
-    {
-        if (i < k)
-        {
-            pre[i] = pre[i - 1] + a[i];
-            ans[i] = pre[i];
-        }
-        else
-        { 
-            if (k == 1 && i < 2){
-                pre[i] = a[i]; 
-                ans[i] = pre[i];
-            }
-            else{
-            pre[i] = a[i] + pre[i - 2];
-            ans[i] = pre[i];}
-        }
-    }
-
-    for (int i = 0; i < n; ++i)
-    {
-        cout << ans[i] << " ";
-    }
-    cout << "\n";
+    
 }
 
 int main()
 {
+    
+}
+*/
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to solve each test case
+void solveTestCase() {
+    int N, K;
+    cin >> N >> K;  // Input size of the array and the target AND value
+    vector<int> arr(N);
+
+    // Input the array
+    for (int i = 0; i < N; ++i) {
+        cin >> arr[i];
+    }
+
+    // Filter elements satisfying A[i] & K == K
+    vector<pair<int, int>> validElements; // {value, 1-based index}
+    for (int i = 0; i < N; ++i) {
+        if ((arr[i] & K) == K) {
+            validElements.push_back({arr[i], i + 1});
+        }
+    }
+
+    if (validElements.empty()) {
+        // If no valid elements, print NO
+        cout << "NO\n";
+        return;
+    }
+
+    // Generate all subsets of valid elements
+    int size = validElements.size();
+    for (int mask = 1; mask < (1 << size); ++mask) { // Avoid empty subset
+        int currentAND = ~0; // Start with all bits set
+        vector<int> subsetIndices;
+
+        for (int i = 0; i < size; ++i) {
+            if (mask & (1 << i)) {
+                currentAND &= validElements[i].first; // Update the AND
+                subsetIndices.push_back(validElements[i].second); // Save index
+            }
+        }
+
+        if (currentAND == K) {
+            // Found a valid subset
+            cout << "YES\n";
+            cout << subsetIndices.size() << "\n";
+            for (int idx : subsetIndices) {
+                cout << idx << " ";
+            }
+            cout << "\n";
+            return;
+        }
+    }
+
+    // If no valid subset found
+    cout << "NO\n";
+}
+
+// Main function
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        spicyy();
+    int T;
+    cin >> T; // Number of test cases
+    while (T--) {
+        solveTestCase();
     }
 
     return 0;
