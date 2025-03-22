@@ -1,29 +1,70 @@
-import sys
+def compute_mex(a, l, r):
+    present = [False] * 4
+    for i in range(l, r + 1):
+        if a[i] < 4:
+            present[a[i]] = True
 
-sys.setrecursionlimit(10**9)
-
-n, x = map(int, input().split())
-
-a = list(map(int, input().split()))
-
-
-inf = float("inf")
+    for x in range(4):
+        if not present[x]:
+            return x
+    return 4
 
 
-dp = [inf] * (x + 1)
-dp[0] = 0
-ans = inf
+def solve():
+    n = int(input())
+    a = list(map(int, input().split()))
+    ops = []
 
-for i in range(1, x+1):
+    while len(a) > 3:
+        has_zero = any(x == 0 for x in a)
 
-    for j in a:
-        if j > i or dp[i - j] == inf:
-            continue
+        if has_zero:
+            pos = next((i for i, x in enumerate(a) if x == 0), -1)
 
+            if pos == 0:
+                m = compute_mex(a, 0, 1)
+                ops.append((1, 2))
+                a = [m] + a[2:]
+            else:
+                m = compute_mex(a, pos - 1, pos)
+                ops.append((pos, pos + 1))
+                a = a[: pos - 1] + [m] + a[pos + 1 :]
         else:
-            dp[i] = min(dp[i], dp[i - j] + 1)
+            m = compute_mex(a, 0, len(a) - 1)
+            ops.append((1, len(a)))
+            a = [m]
+            break
 
-if dp[x] != inf:
-    print(dp[x])
-else:
-    print(-1)
+        if len(a) == 3:
+            p = compute_mex(a, 0, 1)
+            if p != 0 and a[2] != 0:
+                ops.append((1, 2))
+                a = [p, a[2]]
+            else:
+                q = compute_mex(a, 1, 2)
+                if a[0] != 0 and q != 0:
+                    ops.append((2, 3))
+                    a = [a[0], q]
+                else:
+                    ops.append((1, 3))
+                    m = compute_mex(a, 0, 2)
+                    a = [m]
+
+        if len(a) == 2:
+            m = compute_mex(a, 0, 1)
+            ops.append((1, 2))
+            a = [m]
+
+    print(len(ops))
+    for op in ops:
+        print(op[0], op[1])
+
+
+def main():
+    t = int(input())
+    for _ in range(t):
+        solve()
+
+
+if __name__ == "__main__":
+    main()
