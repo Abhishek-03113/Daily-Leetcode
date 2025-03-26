@@ -1,4 +1,7 @@
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <vector>
+#define INF 1e9
 using namespace std;
 
 #define int long long
@@ -10,35 +13,38 @@ using namespace std;
 #define print(x) for (int i = 0; i < x.size(); i++) cout << x[i] << " "; 
 #define loop(i, n) for (int i = 0; i < n; i++)
 
+int coin(int n,int x,V& a){
+
+    int res = 0; 
+    if (x == 0) return 0; 
+    if (x < 0) return -1;
+
+    for (int i = 0; i < n; i++){
+        if (a[i] > x){
+            continue; 
+        }
+        res = res + coin(n, x-a[i], a) + 1; 
+    }
+    return res;
+}
+
+
 signed main(){
     ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    cin.tie(NULL); 
 
-    int n,k; cin >> n >> k;
-    
-    if (n == 1){
-        cout << 1 << nl;
-    }
-    
-    else{
-    vector<int> ans; 
 
-    queue<int> queue;
+    int n,x; cin>> n >>x; 
+    V a(n, 0); 
 
-    for (int i = 1; i <=n; i++){
-        queue.push(i);
+    loop(i, n){
+        cin >> a[i];
     }
 
-    while (!queue.empty()){
+    int ans = coin(n,  x, a);
+    cout << ans << nl;
 
-        for (int i = 0; i < k; i++){
-                queue.push(queue.front()); 
-                queue.pop();}
-        ans.push_back(queue.front());
-        queue.pop();
+    return 0;
     }
 
-    print(ans);
-   }
-
-}
+   
