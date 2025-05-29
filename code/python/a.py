@@ -1,41 +1,66 @@
-def max_xor_sum(arr):
-    """
-    Find the maximum value of (ak⊕a1) + (ak⊕a2) + ... + (ak⊕an) among all 1≤k≤n.
-    
-    Args:
-        arr: A list of integers representing the array [a1, a2, ..., an]
-    
-    Returns:
-        A tuple (max_sum, k) where max_sum is the maximum sum and k is the index (1-indexed)
-    """
-    n = len(arr)
-    max_sum = float('-inf')
-    max_k = 0
-    
-    # Try each possible k
-    for k in range(n):
-        # Calculate the sum for this k
-        current_sum = 0
-        for i in range(n):
-            # Calculate ak ⊕ ai and add to sum
-            # Note: k and i are 0-indexed, but the problem uses 1-indexed
-            current_sum += arr[k] ^ arr[i]
-        
-        # Update maximum if needed
-        if current_sum > max_sum:
-            max_sum = current_sum
-            max_k = k + 1  # Convert to 1-indexed
-    
-    return max_sum, max_k
+import math
+import os
+import sys
+from collections import defaultdict, deque, Counter
+from itertools import permutations, combinations
+from bisect import bisect_left, bisect_right
+from heapq import heappush, heappop
+from functools import lru_cache, reduce
 
-# Example usage
-def main():
-    # Example array
-    arr = list(map(int, input("Enter the array elements separated by space: ").split()))
-    
-    max_sum, k = max_xor_sum(arr)
-    print(f"Maximum sum: {max_sum}")
-    print(f"Achieved with k = {k} (a{k} = {arr[k-1]})")
 
-if __name__ == "__main__":
-    main()
+def solve():
+    n, m = map(int, input().split())
+    batteries = list(map(int, input().split()))
+
+    graph = [[] for _ in range(n + 1)]
+    critical = set([0])
+
+    for _ in range(m):
+        s, t, w = map(int, input().split())
+        graph[s].append((t, w))
+        critical.add(w)
+
+    critical = sorted(critical)
+
+    pq = [(0, 1, 0)]
+    best = {}
+
+    while pq:
+        final_batteries, checkpoint, current_batteries = heappop(pq)
+
+        if checkpoint == n:
+            print(final_batteries)
+            return
+
+        state_key = (checkpoint, current_batteries)
+        if state_key in best and best[state_key] <= final_batteries:
+            continue
+        best[state_key] = final_batteries
+
+        max_available = batteries[checkpoint - 1]
+        targets = set([current_batteries])
+
+        for threshold in critical:
+            if current_batteries < threshold <= current_batteries + max_available:
+                targets.add(threshold)
+
+        if max_available > 0:
+            targets.add(current_batteries + max_available)
+
+        for target_batteries in targets:
+            take = target_batteries - current_batteries
+            if 0 <= take <= max_available:
+                new_final = final_batteries + take
+
+                for next_checkpoint, min_req in graph[checkpoint]:
+                    if target_batteries >= min_req:
+                        next_state = (next_checkpoint, target_batteries)
+                        if next_state not in best or best[next_state] > new_final:
+                            heappush(
+                                pq, (new_final, next_checkpoint, target_batteries))
+
+    print(-1)
+
+
+for _ in range(int(input())):
+    solve()
