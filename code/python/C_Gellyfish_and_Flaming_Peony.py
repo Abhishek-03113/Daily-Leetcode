@@ -9,7 +9,10 @@ from functools import lru_cache, reduce
 
 
 def solve():
-    pass
+    n = int(input()) 
+    a = list(map(int, input().split())) 
+    
+    
 
 
 for _ in range(int(input())):
