@@ -8,29 +8,19 @@ from heapq import heappush, heappop
 from functools import lru_cache, reduce
 mod = 10**9 + 7
 
-def io():
-    return map(int, input().split())
-
-
-def iol():
-    return list(map(int, input().split()))
-
-
-def ios():
-    return input().strip()
-
-
-def ioi():
-    return int(input().strip())
-
-
-def iom(n, m):
-    return [list(map(int, input().split())) for _ in range(n)]
-
-
 
 def solve():
-    pass
+    x = int(input())
+    a = [x for _ in range(3)]
+
+    ans = 0
+
+    while a !=[0,0,0]:
+        a.sort()
+        a[-1] = a[-2] // 2
+        ans += 1
+
+    print(ans)
 
 
 for _ in range(int(input())):

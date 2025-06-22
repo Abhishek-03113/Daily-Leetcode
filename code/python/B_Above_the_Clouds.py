@@ -30,7 +30,16 @@ def iom(n, m):
 
 
 def solve():
-    pass
+    n = ioi() 
+    s = ios() 
+    
+    chars = Counter(s)
+    for i in range(1, n-1): 
+        if chars[s[i]] >= 2: 
+            print("Yes")    
+            return
+    print("No") 
+        
 
 
 for _ in range(int(input())):

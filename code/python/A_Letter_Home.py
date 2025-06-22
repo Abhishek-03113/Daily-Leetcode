@@ -8,6 +8,9 @@ from heapq import heappush, heappop
 from functools import lru_cache, reduce
 mod = 10**9 + 7
 
+# function overloading for input
+
+
 def io():
     return map(int, input().split())
 
@@ -30,7 +33,21 @@ def iom(n, m):
 
 
 def solve():
-    pass
+    n, s = io() 
+    a = iol() 
+    
+    min_ = min(a) 
+    mx = max(a)  
+    
+    diff_mn = abs(min_ - s) 
+    diff_ms = abs(mx - s) 
+    ans = 0 
+    
+    if diff_mn < diff_ms: 
+        ans = abs(min_ - s) + abs(mx - min_) 
+    else:
+        ans = abs(mx - s) + abs(min_ - mx)
+    print(ans)          
 
 
 for _ in range(int(input())):
