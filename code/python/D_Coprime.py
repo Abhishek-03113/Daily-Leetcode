@@ -31,10 +31,28 @@ def iom(n, m):
 
 def solve():
     n = ioi() 
-    a = iol()   
+    a = iol() 
+    
+    d = [[] for _ in range(1001)]
+    
+    for i in range(len(a)): 
+        d[a[i]].append(i) 
+    
+    ans = 1
+    
+    pairs = [[] for _ in range(1001)]
     
     
+    for i in range(1, 1001):
+        for j in range(1, 1001): 
+            if math.gcd(i, j) == 1:
+                pairs[i].append(j)
 
+    for i in range(1, 1001): 
+        for j in pairs[i]:
+            ans = max(ans, d[i][-1]+ d[j][-1] + 2)
+
+    print(ans)
 
 for _ in range(int(input())):
     solve()
