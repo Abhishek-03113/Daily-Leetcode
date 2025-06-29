@@ -38,7 +38,7 @@ def solve():
     for i in range(len(a)): 
         d[a[i]].append(i) 
     
-    ans = 1
+    ans = -1
     
     pairs = [[] for _ in range(1001)]
     
@@ -50,6 +50,8 @@ def solve():
 
     for i in range(1, 1001): 
         for j in pairs[i]:
+            if len(d[i]) == 0 or len(d[j]) == 0:
+                continue
             ans = max(ans, d[i][-1]+ d[j][-1] + 2)
 
     print(ans)
